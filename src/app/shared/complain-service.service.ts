@@ -24,7 +24,7 @@ export class ComplainService {
   }
 
   getAllComplains(): AngularFirestoreCollection<ComplainFields> {
-    console.log(this.complainRef);
+    console.log(this.complainsRef);
     return this.complainsRef;
   }
 

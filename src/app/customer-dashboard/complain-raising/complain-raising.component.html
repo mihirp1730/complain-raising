@@ -1,4 +1,12 @@
 <div class="complain-rising">
+  <button
+    mat-raised-button
+    class="complain-form-full-width btn btn-success"
+    color="primary"
+    (click)="goToReview()"
+  >
+    To review
+  </button>
   <div class="complain-rising-header"></div>
   <div *ngIf="!submitted" class="container">
     <form

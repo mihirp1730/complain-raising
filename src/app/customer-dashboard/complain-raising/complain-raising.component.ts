@@ -9,6 +9,8 @@ import { ComplainService } from 'src/app/shared/complain-service.service';
 import { enumValues } from 'src/environment/causes';
 import { ComplainFields } from '../../shared/complain-fields';
 
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-complain-raising',
   templateUrl: './complain-raising.component.html',
@@ -49,7 +51,8 @@ export class ComplainRaisingComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    public complainService: ComplainService
+    public complainService: ComplainService,
+    public router: Router
   ) {}
 
   ngOnInit() {
@@ -104,5 +107,9 @@ export class ComplainRaisingComponent implements OnInit {
       console.log('Created new item successfully!');
       this.submitted = true;
     });
+  }
+
+  goToReview() {
+    this.router.navigate(['complain-review']);
   }
 }

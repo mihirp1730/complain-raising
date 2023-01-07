@@ -1,0 +1,28 @@
+<div class="list row">
+  <div class="col-md-6">
+    <h4>complains List</h4>
+    <ul class="list-group">
+      <li
+        class="list-group-item"
+        *ngFor="let complain of complains; let i = index"
+        [class.active]="i == currentIndex"
+        (click)="setActiveComplain(complain, i)"
+      >
+        {{ complain.customerName }}
+      </li>
+    </ul>
+  </div>
+  <div class="col-md-6">
+    <div *ngIf="currentComplain">
+      <!-- <app-complain-details
+        (refreshList)="refreshList()"
+        [complain]="currentComplain"
+      ></app-complain-details> -->
+    </div>
+
+    <div *ngIf="!currentComplain">
+      <br />
+      <p>Please click on a complain...</p>
+    </div>
+  </div>
+</div>

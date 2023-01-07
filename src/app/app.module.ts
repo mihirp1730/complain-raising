@@ -18,9 +18,10 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { CustomerDashboardModule } from './customer-dashboard/customer-dashboard.module';
 import { PageNotFoundComponentComponent } from './page-not-found-component/page-not-found-component.component';
 import { environment } from 'src/environment/environment.prod';
+import { ComplainReviewComponent } from './vendor-dashboard/complain-review/complain-review.component';
 
 @NgModule({
-  declarations: [AppComponent, PageNotFoundComponentComponent],
+  declarations: [AppComponent, PageNotFoundComponentComponent, ComplainReviewComponent],
   imports: [
     BrowserModule,
     AngularFireModule.initializeApp(
