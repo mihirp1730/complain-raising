@@ -1,0 +1,94 @@
+<div class="complain-rising">
+  <div class="complain-rising-header"></div>
+  <div *ngIf="!submitted" class="container">
+    <form
+      [formGroup]="complainForm"
+      class="complain-rising-form"
+      (ngSubmit)="onSubmit(complainForm.value)"
+    >
+      <div>
+        <mat-form-field appearance="outline" class="complain-form-full-width">
+          <mat-label> Customer name </mat-label>
+          <input
+            matInput
+            placeholder="Jhon Doe"
+            formControlName="customerName"
+          />
+          <!-- <div class="validation-errors">
+          <ng-container
+            *ngFor="let validation of validation_messages.customerEmail"
+          >
+            <div
+              class="error-message"
+              *ngIf="
+                complainForm.get('customerEmail').hasError(validation.type) &&
+                (complainForm.get('customerEmail').dirty ||
+                  complainForm.get('customerEmail').touched)
+              "
+            >
+              {{ validation.message }}
+            </div>
+          </ng-container>
+        </div> -->
+        </mat-form-field>
+        <br />
+        <mat-form-field appearance="outline" class="complain-form-full-width">
+          <mat-label> Customer email(Work/Concern person's) </mat-label>
+          <input
+            matInput
+            placeholder="pat@example.com"
+            formControlName="customerEmail"
+          />
+        </mat-form-field>
+        <br />
+        <mat-form-field appearance="outline" class="complain-form-full-width">
+          <mat-label>
+            Customer contact number(Work/Concern person's)
+          </mat-label>
+          <input
+            matInput
+            maxlength="10"
+            minlength="10"
+            placeholder="0000000000"
+            formControlName="customerNumber"
+          />
+          <mat-icon fontIcon="phone"></mat-icon>
+        </mat-form-field>
+        <br />
+        <mat-form-field appearance="outline" class="complain-form-full-width">
+          <mat-label> Select Causes </mat-label>
+          <mat-select
+            (selectionChange)="onSelectCause($event)"
+            formControlName="cause"
+          >
+            <mat-option *ngFor="let reson of resons" [value]="reson.name">
+              {{ reson.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <span *ngIf="selectedOtherCause">
+          <div>
+            Enter other cause
+            <mat-form-field class="complain-form-full-width">
+              <input
+                matInput
+                formControlName="otherReason"
+                placeholder="Enter specific cause for report"
+              />
+            </mat-form-field>
+          </div>
+        </span>
+      </div>
+      <button
+        mat-raised-button
+        class="complain-form-full-width btn btn-success"
+        color="primary"
+        type="submit"
+        *ngIf="!submitted"
+        [disabled]="!complainForm.valid"
+      >
+        Submit
+      </button>
+    </form>
+  </div>
+</div>
