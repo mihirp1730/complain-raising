@@ -1,15 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  FormGroup,
-  FormControl,
-  Validators,
-  FormBuilder,
-} from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ComplainService } from 'src/app/shared/complain-service.service';
 import { enumValues } from 'src/environment/causes';
-import { ComplainFields } from '../../shared/complain-fields';
+import { ComplainFields, complainStatus } from '../../shared/complain-fields';
 
 import { Router } from '@angular/router';
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'app-complain-raising',
@@ -17,7 +13,6 @@ import { Router } from '@angular/router';
   styleUrls: ['./complain-raising.component.scss'],
 })
 export class ComplainRaisingComponent implements OnInit {
-  // complainForm: FormGroup<any>;
   complainForm = new FormGroup({
     customerName: new FormControl('', [
       Validators.required,
@@ -38,8 +33,9 @@ export class ComplainRaisingComponent implements OnInit {
         Validators.pattern('[- +()0-9]{10,12}'),
       ])
     ),
-    cause: new FormControl('', Validators.required),
+    complainReason: new FormControl('', Validators.required),
     otherReason: new FormControl(''),
+    status: new FormControl(complainStatus.New),
   });
   errorMessage: string = '';
   resons: any = Object.values(enumValues.causes);
@@ -49,28 +45,17 @@ export class ComplainRaisingComponent implements OnInit {
   otherText: string = 'Other then above';
   currentIndex = -1;
 
-  constructor(
-    private formBuilder: FormBuilder,
-    public complainService: ComplainService,
-    public router: Router
-  ) {}
+  constructor(public complainService: ComplainService, public router: Router) {}
 
   ngOnInit() {
     const list = this.complainService.getAllComplains();
-    console.log(list);
-    console.log(this.resons);
-
-    console.log(this.complainForm.get('cause')?.value);
     this.complainForm
-      .get('cause')
+      .get('complainReason')
       ?.setValue(
-        this.complainForm.get('cause')?.value
-          ? this.complainForm.get('cause')?.value
+        this.complainForm.get('complainReason')?.value
+          ? this.complainForm.get('complainReason')?.value
           : this.resons[0].name
       );
-    // const defaultCause = this.complainForm.get('cause')?.value
-    //   ? this.complainForm.get('cause')?.value
-    //   : this.causes[0];
   }
 
   validation_messages = {
@@ -92,19 +77,18 @@ export class ComplainRaisingComponent implements OnInit {
     if (evt.value.name === this.otherText) {
       this.selectedOtherCause = true;
     }
-    console.log(this.selectedOtherCause);
   }
 
   onSubmit(data: any) {
-    console.log(this.complainForm.value);
     console.log('data value', data);
+    const complainId = uuidv4();
+    data.complainId = complainId;
     const _values = data;
     this.addNewComplain(_values);
   }
 
   addNewComplain(_values: ComplainFields) {
     this.complainService.create(_values).then(() => {
-      console.log('Created new item successfully!');
       this.submitted = true;
     });
   }

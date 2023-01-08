@@ -64,10 +64,10 @@
         </mat-form-field>
         <br />
         <mat-form-field appearance="outline" class="complain-form-full-width">
-          <mat-label> Select Causes </mat-label>
+          <mat-label> Select reason </mat-label>
           <mat-select
             (selectionChange)="onSelectCause($event)"
-            formControlName="cause"
+            formControlName="complainReason"
           >
             <mat-option *ngFor="let reson of resons" [value]="reson.name">
               {{ reson.name }}
@@ -76,12 +76,12 @@
         </mat-form-field>
         <span *ngIf="selectedOtherCause">
           <div>
-            Enter other cause
+            Enter other reason
             <mat-form-field class="complain-form-full-width">
               <input
                 matInput
                 formControlName="otherReason"
-                placeholder="Enter specific cause for report"
+                placeholder="Enter specific reason for report"
               />
             </mat-form-field>
           </div>

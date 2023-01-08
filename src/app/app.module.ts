@@ -1,4 +1,8 @@
-import { NgModule } from '@angular/core';
+import {
+  CUSTOM_ELEMENTS_SCHEMA,
+  NgModule,
+  NO_ERRORS_SCHEMA,
+} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -19,9 +23,13 @@ import { CustomerDashboardModule } from './customer-dashboard/customer-dashboard
 import { PageNotFoundComponentComponent } from './page-not-found-component/page-not-found-component.component';
 import { environment } from 'src/environment/environment.prod';
 import { ComplainReviewComponent } from './vendor-dashboard/complain-review/complain-review.component';
+import { ComplainReviewDetailComponent } from './vendor-dashboard/complain-review-detail/complain-review-detail.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatSortModule } from '@angular/material/sort';
+import { VendorDashboardModule } from './vendor-dashboard/vendor-dashboard.module';
 
 @NgModule({
-  declarations: [AppComponent, PageNotFoundComponentComponent, ComplainReviewComponent],
+  declarations: [AppComponent, PageNotFoundComponentComponent],
   imports: [
     BrowserModule,
     AngularFireModule.initializeApp(
@@ -33,6 +41,7 @@ import { ComplainReviewComponent } from './vendor-dashboard/complain-review/comp
     AngularFireStorageModule, // Only required for storage features
     AppRoutingModule,
     CustomerDashboardModule,
+    VendorDashboardModule,
     MatFormFieldModule,
     MatInputModule,
     MatMenuModule,
@@ -41,6 +50,8 @@ import { ComplainReviewComponent } from './vendor-dashboard/complain-review/comp
     MatIconModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
+    MatTableModule,
+    MatSortModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

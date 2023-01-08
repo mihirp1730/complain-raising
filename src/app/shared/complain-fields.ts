@@ -5,4 +5,12 @@ export interface ComplainFields {
   customerNumber: number;
   complainReason: string;
   otherReson?: string;
+  status: string;
 }
+
+export const complainStatus = {
+  Pending: 'Pending',
+  Complete: 'Complete',
+  New: 'New',
+  Process: 'Process',
+};
